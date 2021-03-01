@@ -13,7 +13,9 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
+    color: deeppink;
+    text-decoration: underline;
 }
 
 .btn-primary {
@@ -66,8 +68,10 @@ body {
     font-family: 'Akaya Telivigala', cursive;
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    color:darkred;
+    color: coral;
+    background: darkcyan;
 }
+
 .footer {
   position: absolute;
   bottom: 0;

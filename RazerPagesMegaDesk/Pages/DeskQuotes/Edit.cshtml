@@ -35,8 +35,27 @@
                 <span asp-validation-for="DeskQuote.QuotePrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="DeskQuote.Desk.Width" class="control-label"></label>
+                <input asp-for="DeskQuote.Desk.Width" class="form-control" required />
             </div>
+            <div class="form-group">
+                <label asp-for="DeskQuote.Desk.Depth" class="control-label"></label>
+                <input asp-for="DeskQuote.Desk.Depth" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="DeskQuote.Desk.NumberOfDrawers" class="control-label"></label>
+                <input asp-for="DeskQuote.Desk.NumberOfDrawers" type="number" min="1" max="7" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="DeskQuote.Desk.SurfaceMaterialId" class="control-label"></label>
+                <select asp-for="DeskQuote.Desk.SurfaceMaterialId"
+                        class="form-control"
+                        asp-items="ViewBag.SurfaceMaterialId">
+                    <option value="">Choose<</option>>
+                </select>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
         </form>
     </div>
 </div>

@@ -20,6 +20,10 @@ namespace RazerPagesMegaDesk.Pages.DeskQuotes
             _context = context;
         }
 
+
+        [BindProperty]
+        public Desk Desk { get; set; }
+
         [BindProperty]
         public DeskQuote DeskQuote { get; set; }
 
@@ -37,8 +41,11 @@ namespace RazerPagesMegaDesk.Pages.DeskQuotes
             {
                 return NotFound();
             }
-           ViewData["DeskId"] = new SelectList(_context.Set<Desk>(), "DeskId", "DeskId");
+            ViewData["DeskId"] = new SelectList(_context.Set<Desk>(), "DeskId", "DeskId");
+            ViewData["ShippingId"] = new SelectList(_context.Set<Shipping>(), "ShippingId", "ShippingName");
+            ViewData["SurfaceMaterialId"] = new SelectList(_context.Set<SurfaceMaterial>(), "SurfaceMaterialId", "SurfaceMaterialName");
             return Page();
+
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
