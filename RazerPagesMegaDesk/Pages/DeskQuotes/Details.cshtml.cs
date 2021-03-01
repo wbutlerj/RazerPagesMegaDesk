@@ -29,7 +29,9 @@ namespace RazerPagesMegaDesk.Pages.DeskQuotes
             }
 
             DeskQuote = await _context.DeskQuote
-                .Include(d => d.Desk).FirstOrDefaultAsync(m => m.DeskQuoteId == id);
+               .Include(d => d.Shipping)
+                     .Include(d => d.Desk)
+                     .Include(d => d.Desk.SurfaceMaterial).FirstOrDefaultAsync(m => m.DeskQuoteId == id);
 
             if (DeskQuote == null)
             {

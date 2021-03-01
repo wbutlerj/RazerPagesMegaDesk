@@ -30,6 +30,7 @@ namespace RazerPagesMegaDesk.Model
         //properties
         public int DeskQuoteId { get; set; }
 
+        [StringLength(60, MinimumLength = 3)]
         [Display(Name = "Customer Name")]
         public string CustomerName { get; set; }
 

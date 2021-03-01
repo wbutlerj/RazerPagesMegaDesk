@@ -24,10 +24,16 @@ namespace RazerPagesMegaDesk.Model
 
         public int DeskId { get; set; }
 
+        [Required]
+        [Range(24.00,96.00)]
         public decimal Width { get; set; }
 
+        [Required]
+        [Range(12.00, 48.00)]
         public decimal Depth { get; set; }
 
+        [Required]
+        [Range(0, 7)]
         [Display(Name ="Number of Drawers")]
         public int NumberOfDrawers { get; set; }
 

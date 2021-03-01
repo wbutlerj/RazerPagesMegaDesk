@@ -5,13 +5,17 @@
     ViewData["Title"] = "Index";
 }
 
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+
+
 <h1>Index</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
 
-<form>
+@*<form>
     <p>
         Filter Date: <select asp-for="DeskQuoteDate" asp-items="Model.Dates">
             <option value="">All</option>
@@ -19,10 +23,28 @@
         Filter Name: <select asp-for="DeskQuoteName" asp-items="Model.Names">
             <option value="">All</option>
         </select>
-         Name: <input type="text" asp-for="SearchString" />
+      
         <input type="submit" value="Filter" />
     </p>
+</form>*@
+
+
+<form asp-controller="DeskQuotes" asp-action="Index" method="get">
+    <p>
+        Name: <input type="text" name="SearchString" value="@ViewBag.SearchString" />
+
+        Sort By:
+              <select name="sortBy">
+                  <option value="">Choose Option</option>
+                  <option value="cusName">Customer Name</option>
+                  <option value="date">Date</option>
+              </select>
+
+        <input type="submit" value="Search" />
+
+    </p>
 </form>
+
 
 <table class="table">
     <thead>
@@ -55,38 +77,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.DeskQuote) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuoteDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuotePrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Shipping.ShippingName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desk.Width)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desk.Depth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desk.NumberOfDrawers)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desk.SurfaceMaterial.SurfaceMaterialName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.DeskQuoteId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.DeskQuoteId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.DeskQuoteId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.DeskQuote)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuoteDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuotePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shipping.ShippingName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desk.Width)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desk.Depth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desk.NumberOfDrawers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desk.SurfaceMaterial.SurfaceMaterialName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.DeskQuoteId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.DeskQuoteId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.DeskQuoteId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

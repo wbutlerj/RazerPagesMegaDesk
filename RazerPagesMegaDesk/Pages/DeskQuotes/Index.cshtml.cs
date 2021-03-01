@@ -32,6 +32,9 @@ namespace RazerPagesMegaDesk.Pages.DeskQuotes
         public DateTime DeskQuoteDate { get; set; }
 
         [BindProperty(SupportsGet = true)]
+        public string sortBy { get; set; }
+
+        [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
         public async Task OnGetAsync()
@@ -53,26 +56,44 @@ namespace RazerPagesMegaDesk.Pages.DeskQuotes
                 deskQuotes = deskQuotes.Where(s => s.CustomerName.Contains(SearchString));
             }
 
-            if (!string.IsNullOrEmpty(DeskQuoteName))
-            {
-                deskQuotes = deskQuotes.Where(x => x.CustomerName == DeskQuoteName);
+            if (!string.IsNullOrEmpty(sortBy)) {
+
+                switch (sortBy)
+                {
+                    case "cusName":
+                        deskQuotes = deskQuotes.OrderBy(s => s.CustomerName);
+                        break;
+                    case "date":
+                        deskQuotes = deskQuotes.OrderBy(s => s.QuoteDate);
+                        break;
+                }
+
+           
+
             }
-           /* if (!String.IsNullOrEmpty(DeskQuoteDate))
-            {
-                deskQuotes = deskQuotes.Where(x => x.QuoteDate == DeskQuoteDate);
-            }*/
 
-            Names = new SelectList(await nameQuery.Distinct().ToListAsync());
 
-            Dates = new SelectList(await dateQuery.Distinct().ToListAsync());
 
-            /* DeskQuote = await deskQuotes.ToListAsync();*/
+                /*  if (!string.IsNullOrEmpty(DeskQuoteName))
+                  {
+                      deskQuotes = deskQuotes.Where(x => x.CustomerName == DeskQuoteName);
+                  }*/
+                /* if (!String.IsNullOrEmpty(DeskQuoteDate))
+                 {
+                     deskQuotes = deskQuotes.Where(x => x.QuoteDate == DeskQuoteDate);
+                 }*/
 
-            DeskQuote = await deskQuotes
-                  .Include(d => d.Shipping)
-                  .Include(d => d.Desk)
-                  .Include(d => d.Desk.SurfaceMaterial)
-                  .ToListAsync();
-        }
+                /*      Names = new SelectList(await nameQuery.Distinct().ToListAsync());
+
+                      Dates = new SelectList(await dateQuery.Distinct().ToListAsync());*/
+
+                /* DeskQuote = await deskQuotes.ToListAsync();*/
+
+                DeskQuote = await deskQuotes
+                      .Include(d => d.Shipping)
+                      .Include(d => d.Desk)
+                      .Include(d => d.Desk.SurfaceMaterial)
+                      .ToListAsync();
+            } 
     }
 }
